@@ -1,26 +1,31 @@
 package com.training.stephnews.models;
 
-import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
-@Entity
-@Table(name = "categorie")
+@Document("categorie")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class Categorie {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    public Integer id;
+    private @Id String id;
 
-    public String titre;
-    public String image;
+    @NotBlank(message = "Le titre de la categorie ne peut pas être vide")
+    private String titre;
 
-    @OneToMany(mappedBy = "categorie")
-    public List<Article> articles;
+    private String image;
+
+    private LocalDateTime createdAt;
+
+    private LocalDateTime updatedAt;
+
+    private List<Article> articles;
 }

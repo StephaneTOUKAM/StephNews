@@ -1,10 +1,47 @@
 spring:
+  main:
+    allow-bean-definition-overriding: true
+  application:
+    name: stephnews
+  config:
+    import: optional:file:.env[.properties]
   jpa:
     hibernate:
       ddl-auto: update
-    show-sql: true
-  datasource:
-    url: jdbc:mysql://${MYSQL_HOST:localhost}:8889/stephnews
-    username: steph
-    password: 12345678
-    driver-class-name: com.mysql.cj.jdbc.Driver
+  data:
+    mongodb:
+      uri: ${DATABASE_URL}
+      database: ${DATABASE_NAME}
+  mail:
+    host: ${SMTP_HOST}
+    port: ${SMTP_PORT}
+    username: ${SMTP_USERNAME}
+    password: ${SMTP_PASSWORD}
+    protocol: smtp
+    properties:
+      "mail.transport.protocol": smtp
+      "mail.smtp.auth": true
+      "mail.smtp.starttls.enable": true
+
+info:
+  application:
+    name: ${spring.application.name}
+    description: An application to view news and informations
+    version: '@project.version@'
+    spring-cloud-version: '@spring-cloud.version@'
+    spring-boot-version: '@project.parent.version@'
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+        exclude: "env"
+
+token:
+  signing:
+    key: 413F4428472B4B6250655368566D5970337336763979244226452948404D6351
+
+logging:
+  level:
+    web: debug
