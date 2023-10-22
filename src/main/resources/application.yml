@@ -23,20 +23,22 @@ spring:
       "mail.smtp.auth": true
       "mail.smtp.starttls.enable": true
 
-info:
-  application:
-    name: ${spring.application.name}
-    description: An application to view news and informations
-    version: '@project.version@'
-    spring-cloud-version: '@spring-cloud.version@'
-    spring-boot-version: '@project.parent.version@'
-
 management:
   endpoints:
     web:
       exposure:
         include: "*"
-        exclude: "env"
+  info:
+    env:
+      enabled: true
+
+info:
+  app:
+    name: ${spring.application.name}
+    description: An application to view news and informations
+    version: '@project.version@'
+    spring-cloud-version: '@spring-cloud.version@'
+    spring-boot-version: '@project.parent.version@'
 
 token:
   signing:
