@@ -1,5 +1,6 @@
 package com.stephanetoukam.stephnews.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.stephanetoukam.stephnews.models.enums.Role;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
@@ -37,6 +38,7 @@ public class User implements UserDetails {
 
     private String avatar;
 
+    @JsonIgnore
     private String password;
 
     private Role role;

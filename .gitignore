@@ -31,6 +31,8 @@ build/
 
 src/main/resources/static/uploads
 
+src/main/resources/stephnews-f7426be12afe.json
+
 ### VS Code ###
 .vscode/
 

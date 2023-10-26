@@ -22,7 +22,6 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
-    private final String uploadPath = "/uploads/";
 
     @Override
     public ApiCustomResponse signup(SignUpRequest request) {
@@ -30,7 +29,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                 .firstName(request.getFirstName())
                 .lastName(request.getLastName())
                 .email(request.getEmail())
-                .avatar(uploadPath+request.getAvatarFileName())
+                .avatar(request.getAvatarFileName())
                 .active(false)
                 .password(passwordEncoder.encode(request.getPassword()))
                 .role(Role.USER)

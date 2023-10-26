@@ -17,11 +17,15 @@ spring:
     port: ${SMTP_PORT}
     username: ${SMTP_USERNAME}
     password: ${SMTP_PASSWORD}
-    protocol: smtp
     properties:
-      "mail.transport.protocol": smtp
-      "mail.smtp.auth": true
-      "mail.smtp.starttls.enable": true
+      mail:
+        transport:
+          protocol: smtp
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
 
 management:
   endpoints:
@@ -40,9 +44,19 @@ info:
     spring-cloud-version: '@spring-cloud.version@'
     spring-boot-version: '@project.parent.version@'
 
+gcp:
+  config:
+    file: stephnews-f7426be12afe.json
+  project:
+    id: stephnews
+  bucket:
+    id: stephnews
+  dir:
+    name: dev
+
 token:
   signing:
-    key: 413F4428472B4B6250655368566D5970337336763979244226452948404D6351
+    key: ${TOKEN_SIGNING_KEY}
 
 logging:
   level:
