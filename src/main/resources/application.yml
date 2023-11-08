@@ -1,63 +1,25 @@
+server:
+  port: 8081
+
 spring:
-  main:
-    allow-bean-definition-overriding: true
   application:
-    name: stephnews
-  config:
-    import: optional:file:.env[.properties]
-  jpa:
-    hibernate:
-      ddl-auto: update
-  data:
-    mongodb:
-      uri: ${DATABASE_URL}
-      database: ${DATABASE_NAME}
-  mail:
-    host: ${SMTP_HOST}
-    port: ${SMTP_PORT}
-    username: ${SMTP_USERNAME}
-    password: ${SMTP_PASSWORD}
-    properties:
-      mail:
-        transport:
-          protocol: smtp
-        smtp:
-          auth: true
-          starttls:
-            enable: true
-            required: true
-
-management:
-  endpoints:
-    web:
-      exposure:
-        include: "*"
-  info:
-    env:
-      enabled: true
-
-info:
-  app:
-    name: ${spring.application.name}
-    description: An application to view news and informations
-    version: '@project.version@'
-    spring-cloud-version: '@spring-cloud.version@'
-    spring-boot-version: '@project.parent.version@'
-
-gcp:
-  config:
-    file: stephnews-f7426be12afe.json
-  project:
-    id: stephnews
-  bucket:
-    id: stephnews
-  dir:
-    name: dev
-
-token:
-  signing:
-    key: ${TOKEN_SIGNING_KEY}
+    name: StephNews
+  security:
+    oauth2:
+      client:
+        provider:
+          external:
+            issuer-uri: http://localhost:8080/realms/external
+        registration:
+          external:
+            provider: external
+            client-name: external-client
+            client-id: external-client
+            client-secret: 0kHz9HWuDaEZlI1lxNS5tH0JQwog9Qbi
+            scope: openid,offline_access,profile
+            authorization-grant-type: authorization_code
 
 logging:
   level:
     web: info
+    org.springframework.security: INFO
