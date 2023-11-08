@@ -1,5 +1,6 @@
 package com.stephanetoukam.stephnews.services;
 
+import com.stephanetoukam.stephnews.dao.request.ResetPwdRequest;
 import com.stephanetoukam.stephnews.dao.request.SignUpRequest;
 import com.stephanetoukam.stephnews.dao.request.SigninRequest;
 import com.stephanetoukam.stephnews.dao.response.ApiCustomResponse;
@@ -9,4 +10,8 @@ public interface AuthenticationService {
     ApiCustomResponse signup(SignUpRequest request);
 
     JwtAuthenticationResponse signin(SigninRequest request);
+
+    ApiCustomResponse forgotPassword(SigninRequest request);
+
+    ApiCustomResponse resetPassword(ResetPwdRequest request);
 }

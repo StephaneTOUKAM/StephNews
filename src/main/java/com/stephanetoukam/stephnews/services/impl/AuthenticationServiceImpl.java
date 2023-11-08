@@ -1,5 +1,6 @@
 package com.stephanetoukam.stephnews.services.impl;
 
+import com.stephanetoukam.stephnews.dao.request.ResetPwdRequest;
 import com.stephanetoukam.stephnews.dao.request.SignUpRequest;
 import com.stephanetoukam.stephnews.dao.request.SigninRequest;
 import com.stephanetoukam.stephnews.dao.response.ApiCustomResponse;
@@ -49,5 +50,27 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                 .orElseThrow(() -> new IllegalArgumentException("Invalid email or password"));
         var jwt = jwtService.generateToken(user);
         return JwtAuthenticationResponse.builder().token(jwt).build();
+    }
+
+    @Override
+    public ApiCustomResponse forgotPassword(SigninRequest request) {
+        var user = userRepository.findByEmail(request.getEmail())
+                .orElseThrow(() -> new IllegalArgumentException("Invalid email"));
+
+        return ApiCustomResponse.builder()
+                .data(user)
+                .message("Un email vous a été envoyé pour verifier votre compte")
+                .build();
+    }
+
+    @Override
+    public ApiCustomResponse resetPassword(ResetPwdRequest request) {
+        var user = userRepository.findByEmail(request.getPassword())
+                .orElseThrow(() -> new IllegalArgumentException("Invalid email"));
+
+        return ApiCustomResponse.builder()
+                .data(user)
+                .message("Un email vous a été envoyé pour verifier votre compte")
+                .build();
     }
 }

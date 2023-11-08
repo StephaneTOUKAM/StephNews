@@ -54,8 +54,7 @@ public class FileSystemStorageService implements StorageService {
 
     @Override
     public String storeInCloud(MultipartFile file) {
-        LOGGER.debug("Start file uploading service");
-        String fileUrl = "";
+        String fileUrl;
         String originalFileName = file.getOriginalFilename();
         if(originalFileName == null){
             throw new ApiErrorException("Original file name is null");
